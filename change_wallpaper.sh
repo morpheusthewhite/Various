@@ -1,5 +1,5 @@
 #!/bin/bash
-#This is a bash script that changes the wallpaper, switching among the .jpg images in the below path (images must be saved with progressive names: 0.jpg, 1.jpg ...) reading the last wallpaper set from the count file, in countFolder folder, updating it at the end
+#This is a bash script that changes the wallpaper in GNOME desktops, switching among the .jpg images in the below path (images must be saved with progressive names: 0.jpg, 1.jpg ...) reading the last wallpaper set from the count file, in countFolder folder, updating it at the end
 count_filename="/home/username/Pictures/AutomatedWallpapers/countFolder/count"
 path_to_images="/home/username/Pictures/AutomatedWallpapers/"
 
