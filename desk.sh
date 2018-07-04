@@ -44,24 +44,22 @@ case $1 in
         
         ;;
     -l)
-        sudo ls /usr/share/applications/
+        sudo ls /usr/local/share/applications/
         ;;
     -r)
-        sudo rm /usr/share/applications/$2.desktop
+        sudo rm /usr/local/share/applications/$2.desktop
         ;;
     -m)
-        sudo nano /usr/share/applications/$2.desktop
+        sudo nano /usr/local/share/applications/$2.desktop
         ;;
     *)
-        sudo echo "$ENTRY" | sudo tee /usr/share/applications/$1.desktop > /dev/null
-        sudo nano /usr/share/applications/$1.desktop
-        RES=`sudo echo "$ENTRY" | sudo diff /usr/share/applications/$1.desktop -`
+        sudo echo "$ENTRY" | sudo tee /usr/local/share/applications/$1.desktop > /dev/null
+        sudo nano /usr/local/share/applications/$1.desktop
+        RES=`sudo echo "$ENTRY" | sudo diff /usr/local/share/applications/$1.desktop -`
         if [ -z "$RES" ]
             then
-                sudo rm /usr/share/applications/$1.desktop
+                sudo rm /usr/local/share/applications/$1.desktop
                 echo "File unmodified, removing it..."
         fi
         ;;
 esac
-
-
