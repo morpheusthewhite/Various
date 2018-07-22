@@ -10,7 +10,8 @@ def build_parser():
                         help='Image to be converted and eventually scaled')
     parser.add_argument("-s --size", metavar='WIDTHxHEIGHT', type=str, nargs=1,
                         help="new size of the image (default is 720x1280)", default="720x1280")
-
+    parser.add_argument("--no-resize", nargs=1, help="if True, does not resize the image (default=False)", default=False,
+                        metavar="True/False", type=bool)
     return parser
 
 
@@ -31,8 +32,9 @@ def main():
     args_dict = vars(args)
 
     size_str = args_dict["s __size"].split("x")  # get dimensions from parser
-
     size = (int(size_str[0]), int(size_str[1]))
+
+    must_not_be_resized = args_dict["no_resize"]
 
     for image in args_dict["image"]:
         print()
@@ -43,7 +45,8 @@ def main():
 
         im = Image.open(image, "r")
 
-        im.thumbnail(size, Image.ANTIALIAS)
+        if not must_not_be_resized:
+            im.thumbnail(size, Image.ANTIALIAS)
 
         new_filename = get_new_filename(image)
 
