@@ -19,7 +19,7 @@ def get_new_filename(image_filename):
 
     for i in range(len(image_filename)-1, 0, -1):
         if image_filename[i] == '.':
-            return image_filename[:i-1] + ".jpeg"
+            return image_filename[:i] + ".jpeg"
 
     return image_filename+".jpeg"
 
@@ -48,11 +48,14 @@ def main():
         if not must_not_be_resized:
             im.thumbnail(size, Image.ANTIALIAS)
 
-        new_filename = get_new_filename(image)
+        new_filename = get_new_filename(image)		
+        try:
+            im.save(new_filename, "JPEG")
+        except (IOError, OSError):
+            im = im.convert("RGB")
+            im.save(new_filename, "JPEG")
 
-        im.save(new_filename, "JPEG")
-
-        print("Converted "+image+". Output:")
+        print("Converted "+image+" to "+new_filename+". Output:")
         subprocess.Popen(["file", new_filename]).wait()
 
 
